@@ -20,11 +20,16 @@ function Layout({ children } : Props) {
                     </Toolbar>
                 </AppBar>
             </Box>
-            <Box sx={{
-                height: '100vh',
-                bgcolor: '#f9f9f9'
-            }}>
-                {children}
+            <Box>
+                <Toolbar />
+                <Box sx={{
+                    height: '100vh',
+                    bgcolor: '#f9f9f9'
+                }}>
+                    {children}
+                </Box>
+
+                
             </Box>
         </Box>
         
