@@ -1,11 +1,26 @@
-import Typography from '@mui/material/Typography';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import './App.css';
+import Restaurants from './components/Restaurants';
+import Home from './components/Home';
+import Layout from './components/Layout';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/restaurants",
+    element: <Restaurants />,
+  },
+]);
 
 function App() {
   return (
-    <Typography variant='h6' component='h2' color='primary' >
-      Hello React material
-    </Typography>
+    <Layout>
+      <RouterProvider router={router} />
+    </Layout>
   );
 }
 
