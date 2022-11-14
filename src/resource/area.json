@@ -1,0 +1,28 @@
+[
+    ["Karachi", [
+        "Bahadurabad",
+        "Saddar",
+        "Korangi"
+    ]],
+    ["Lahore", [
+        "new-town",
+        "old-town",
+        "model-town"
+    ]],
+    ["Quetta", [
+        "new-town",
+        "old-town",
+        "model-town"
+    ]],
+    ["Peshawar", [
+        "new-town",
+        "old-town",
+        "model-town"
+    ]],
+    ["Islamabad", [
+        "new-town",
+        "old-town",
+        "model-town"
+    ]]
+]
+    
