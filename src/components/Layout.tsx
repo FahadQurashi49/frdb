@@ -22,9 +22,7 @@ function Layout({ children } : Props) {
             </Box>
             <Box>
                 <Toolbar />
-                <Box sx={{
-                    bgcolor: '#f9f9f9'
-                }}>
+                <Box >
                     {children}
                 </Box>
 

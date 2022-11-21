@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Autocomplete, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
+import SearchIcon from '@mui/icons-material/SearchSharp';
 
 import cityArea from '../resource/area.json';
 
@@ -18,6 +20,9 @@ function Home() {
     const cityAreaMap = new Map(cityArea as []);
     const [areas, setAreas] = useState([] as string[]);
     const [area, setArea] = useState('' as (string | null));
+    const navigate = useNavigate();
+
+    const marginBetween = 0.5;
 
     
 
@@ -32,13 +37,19 @@ function Home() {
     const handleAreaChange = (e: any, newValue: string | null) => {
         setArea(newValue);
     }
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        navigate(`/restaurants/${city}_${area}`);
+    }
+
     return (
         <Box display="flex"
             justifyContent="center"
             alignItems="center"
             minHeight="100vh"
         >
-            <form>
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                 <Box display='flex' >
                     <FormControl>
                         <InputLabel id="city-select-label">City</InputLabel>
@@ -48,7 +59,7 @@ function Home() {
                             label="City"
                             autoWidth
                             value={city}
-                            sx={{ width: 150 }}
+                            sx={{ width: 150, mx: marginBetween }}
                             onChange={handleCityChange}
                         >
                             {cities.map(city => <MenuItem key={city} value={city}>{city}</MenuItem>)}
@@ -61,10 +72,17 @@ function Home() {
                         options={areas}
                         value={area}
                         onChange={handleAreaChange}
-                        sx={{ width: 200 }}
+                        sx={{ width: 200, mx: marginBetween }}
                         renderInput={(params) => <TextField {...params} label="Area" />}
                     />
-                    <Button variant='contained'>SUBMIT</Button>
+                    <Button variant='contained'
+                    type='submit'
+                     disableElevation 
+                     sx={{ mx: marginBetween }}
+                     disabled={!city || !area}
+                    >
+                        <SearchIcon fontSize='large' />
+                    </Button>
                 </Box>
                 
             </form>

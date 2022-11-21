@@ -1,0 +1,63 @@
+[
+    {
+      "id": "",
+      "type": "restaurant",
+      "restaurant_name": "Desi food inn",
+      "description": "Opened in 1963 Desi food inn is the finest restaurant in Karachi. Serving all kind of traditional dishes and speciality in Biryani and Nihari.",
+      "location": "#Karachi #Saddar",
+      "avg_rating": 4,
+      "total_ratings": 2,
+      "logo": ""
+    },
+    {
+      "id": "",
+      "type": "restaurant",
+      "restaurant_name": "BBQ and grill house",
+      "description": "Located in Bahadurabad BBQ and grill house is the best restaurant in Karachi for BBQ and Kababs. Their BBQ platter is their seller and also grilled fish",
+      "location": "#Karachi #Bahadurabad",
+      "avg_rating": 2.5,
+      "total_ratings": 2,
+      "logo": ""
+    },
+    {
+      "id": "",
+      "type": "restaurant",
+      "restaurant_name": "Steak and burger cafe",
+      "description": "Steak and burger cafe is the best place in Lahore for the finest most juiciest steaks. Operating for 10 years this restaurant timings are 6-11 pm.",
+      "location": "#Lahore #New-town",
+      "avg_rating": 2,
+      "total_ratings": 2,
+      "logo": ""
+    },
+    {
+      "id": "",
+      "type": "restaurant",
+      "restaurant_name": "Special Kabab house",
+      "description": "Opened in 1970 Special Kabab house is the finest restaurant in Lahore. Serving all kind of Kababs and BBQ",
+      "location": "#Lahore #Old-town",
+      "avg_rating": 3,
+      "total_ratings": 2,
+      "logo": ""
+    },
+    {
+      "id": "",
+      "type": "restaurant",
+      "restaurant_name": "Burgers and sandwiches home",
+      "description": "Located in New-Colony Burgers and sandwiches home is the best restaurant in Islamabad for Burgers and sandwiches",
+      "location": "#Islamabad #New-Colony",
+      "avg_rating": 4.5,
+      "total_ratings": 2,
+      "logo": ""
+    },
+    {
+      "id": "",
+      "type": "restaurant",
+      "restaurant_name": "Thai cuisine restaurant",
+      "description": "Thai cuisine restaurant is the best place in Islamabad for the finest Thai food. Operating for 15 years this restaurant timings are 6 pm - 12 am.",
+      "location": "#Islamabad #Old-Colony",
+      "avg_rating": 3.5,
+      "total_ratings": 2,
+      "logo": ""
+    }
+  ]
+  
