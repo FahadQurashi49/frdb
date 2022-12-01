@@ -1,5 +1,7 @@
 import Grid from '@mui/material/Unstable_Grid2';
+import { useNavigate } from "react-router-dom";
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+
 import { Restaurant } from '../models/Restaurant';
 
 interface Props {
@@ -8,14 +10,19 @@ interface Props {
 }
 
 function RestaurantGridItem({ restaurant }: Props) {
+    const navigate = useNavigate();
+
+    const handleRestaurantClick = () => {
+        navigate(`/restaurant/${restaurant.id}`);
+    };
     return (
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={3} >
             <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
+                <CardActionArea onClick={handleRestaurantClick}>
                     <CardMedia
                         component="img"
                         height="140"
-                        image="/static/images/restaurant_pic.jpeg"
+                        image="/static/images/bbq.jpeg"
                         alt={restaurant.name}
                     />
                     <CardContent>

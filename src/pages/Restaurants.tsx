@@ -16,13 +16,15 @@ function Restaurants() {
     return (
         <Box sx={{ mx: 15 }}>
             <Box sx={{ my: 2 }}>
-                <Typography component="div" variant="h4">Restaurants in {city} {area}</Typography>
+                <Typography component="div" sx={{ typography: { md: 'h4', sm: 'h5', xs: 'h6' } }} >
+                    Restaurants in {city} {area}
+                </Typography>
             </Box>
             
             <Grid container spacing={2}>
                 {restaurants.map((restaurant) => {
                     return (
-                        <RestaurantGridItem restaurant={restaurant} />
+                        <RestaurantGridItem restaurant={restaurant} key={restaurant.id} />
                     );
                 })}
             </Grid>

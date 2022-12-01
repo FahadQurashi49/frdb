@@ -1,0 +1,82 @@
+[
+    {
+        "id": "",
+        "type": "review",
+        "review_text": "The food tastes absolutely amazing. Mostly tried BBQ but the meat was well cooked, perfectly seasoned and juicy. The dessert, kunafa, was also delicious. Their serving size,presentation, service, and attention to customers were good too. Improvements in lighting can improve the ambience. Otherwise, the restaurant has good sitting space consisting of two floors.\nYou  an also make reservations beforehand to avoid waiting in lines.",
+        "restaurant_id": "906431d4-1a41-4a89-8513-ecac4a852f4f",
+        "user_name": "Fredie johns",
+        "rating": 5,
+        "create_date": "",
+        "imgs": ""
+    },
+    {
+        "id": "",
+        "type": "review",
+        "review_text": "Food and value for money is reasonable. The parking space and the air conditioning inside the restaurant is another story. Great for families and the staff is great.",
+        "restaurant_id": "906431d4-1a41-4a89-8513-ecac4a852f4f",
+        "user_name": "Peter parker",
+        "rating": 3,
+        "create_date": "",
+        "imgs": ""
+    },
+    {
+        "id": "",
+        "type": "review",
+        "review_text": "Food taste was mixed. Tried chicken Reshmi. Beef Dhaga kebab and chicken  boti they were good. The chicken myo garlic rolls were not good the myo taste was strange. Service was good but cleanliness requires much more work specially the menu pages were dirty from chatni and what not. Parking was easy.",
+        "restaurant_id": "c5fab1dc-deb8-4723-8ee1-d984a61b23ab",
+        "user_name": "Steve Rogers",
+        "rating": 3,
+        "create_date": "",
+        "imgs": ""
+    },
+    {
+        "id": "",
+        "type": "review",
+        "review_text": "Below average taste and seating arrangement. Price at higher side especially when compared to taste and quality being offered. Location is easy to access however parking can be an issue depending on timing.",
+        "restaurant_id": "c5fab1dc-deb8-4723-8ee1-d984a61b23ab",
+        "user_name": "Bruce banner",
+        "rating": 2,
+        "create_date": "",
+        "imgs": ""
+    },
+    {
+        "id": "",
+        "type": "review",
+        "review_text": "Steak and burger cafe have been one of my favourite food spots. I visited Steak and burger cafes after a long time this Thursday. Gave the usual order which is half chicken piece with rice and side lines.  They served us order was  good  and the rice were in good quantity then i was expecting. Overall I was satisfied with  peri sauces whereas the services was good. 8/10 food. The chicken breast was a bit overcooked so it became a bit tough. Wanted to have wedges but they were out which made me sad :( If you love spicy food this is the place to come.\nGood value for money.\nAmbiance 8/10. Good casual comfortable feeling.\nService 10/10.",
+        "restaurant_id": "674a1815-d78a-4a18-9da9-b776e27d452b",
+        "user_name": "Tony Stark",
+        "rating": 3,
+        "create_date": "",
+        "imgs": ""
+    },
+    {
+        "id": "",
+        "type": "review",
+        "review_text": "Worst experiences ever (yes, my bad. I thought they would have changed). Bad customer service, plus look at the portion size!!! They have increased their prices and reduced size (they told me this themselves.. But told me 1 will be enough for 1 person).\n\nThis wouldn't even be enough for a small child!\n\nPlus they sent very spicy instead of mild.",
+        "restaurant_id": "674a1815-d78a-4a18-9da9-b776e27d452b",
+        "user_name": "Wanda maximoff",
+        "rating": 1,
+        "create_date": "",
+        "imgs": ""
+    },
+    {
+        "id": "",
+        "type": "review",
+        "review_text": "THE STAFF AND AMBIENCE IS REALLY NICE!\n\nHad chicken karahi which was average 3/5 only it had the taste of black pepper. It was just a bhuni v chicken and not a karahi.\n\nHad finger fish which was amazing in taste and quantity as well. Just loved every bite of it. 5/5\n\nFried Rice was really good. 4/5\n\nThe raita was rich in taste and quantity 5/5\n\nStaff was attentive and cooperative. I really like the way the restaurant looks.\n\nThey need to change the recipe for karahi as I had the ginger one in past and it was a disappointment too.\n",
+        "restaurant_id": "f54964db-3a6a-4e17-8ff2-d7fe18dbf7a3",
+        "user_name": "Norman osborne",
+        "rating": 4,
+        "create_date": "",
+        "imgs": ""
+    },
+    {
+        "id": "",
+        "type": "review",
+        "review_text": "Very okayish, didn't enjoy at all.\nThe taste was very flat, and staff wasn't courteous as well as compare to the other restaurants in the same profile.",
+        "restaurant_id": "f54964db-3a6a-4e17-8ff2-d7fe18dbf7a3",
+        "user_name": "Steven Strange",
+        "rating": 2,
+        "create_date": "",
+        "imgs": ""
+    }
+]
