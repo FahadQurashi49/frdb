@@ -1,6 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Box } from '@mui/system';
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
+import LoginDialog from './LoginDialog';
+import SignUpDialog from './SignUpDialog';
+
 
 interface Props {
     children?: ReactNode
@@ -8,6 +11,27 @@ interface Props {
 }
 
 function Layout({ children } : Props) {
+    const [openLoginDialog, setOpenLoginDialog] = useState(false);
+    const [openSignupDialog, setOpenSignUpDialog] = useState(false);
+
+    const handleLoginClick = () => {
+        setOpenLoginDialog(true);
+    };
+    const handleLoginDialogClose = () => {
+        setOpenLoginDialog(false);
+    };
+    const handleSignUpClick = () => {
+        setOpenLoginDialog(false);
+        setOpenSignUpDialog(true);
+    };
+
+    const handleSignUpDialogClose = () => {
+        setOpenSignUpDialog(false);
+    };
+    const handleLoginFromSignUpClick = () => {
+        setOpenLoginDialog(true);
+        setOpenSignUpDialog(false);
+    };
     return (
         <Box>
             <Box sx={{ flexGrow: 1 }}>
@@ -16,13 +40,15 @@ function Layout({ children } : Props) {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             FRDB
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        <Button onClick={handleLoginClick} color="inherit">Login</Button>
                     </Toolbar>
                 </AppBar>
             </Box>
             <Box>
                 <Toolbar />
                 <Box >
+                    <LoginDialog open={openLoginDialog} handleClose={handleLoginDialogClose} handleSignUpClick={handleSignUpClick} />
+                    <SignUpDialog open={openSignupDialog} handleClose={handleSignUpDialogClose} handleLoginClick={handleLoginFromSignUpClick} />
                     {children}
                 </Box>
 
