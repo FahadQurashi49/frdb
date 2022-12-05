@@ -5,6 +5,7 @@ import Restaurants from './pages/Restaurants';
 import Restaurant from './pages/Restaurant';
 import Home from './pages/Home';
 import Layout from './components/Layout';
+import AddReview from "./pages/AddReview";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/restaurant/:restaurantId",
-    element: <Restaurant />,
+    element: <Restaurant />
   },
+  {
+    path: "/restaurant/:restaurantId/review/add",
+    element: <AddReview />,
+  }
 ]);
 
 function App() {
