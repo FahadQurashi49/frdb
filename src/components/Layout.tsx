@@ -1,8 +1,9 @@
 import { ReactNode, useState } from 'react';
 import { Box } from '@mui/system';
-import { AppBar, Button, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, Link, Toolbar } from '@mui/material';
 import LoginDialog from './LoginDialog';
 import SignUpDialog from './SignUpDialog';
+import RestaurantSearch from './RestaurantSearch';
 
 
 interface Props {
@@ -32,14 +33,19 @@ function Layout({ children } : Props) {
         setOpenLoginDialog(true);
         setOpenSignUpDialog(false);
     };
+
+    const handleHomeClick = () => {
+        window.location.href = `${window.location.origin}/`;
+    };
     return (
         <Box>
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar elevation={0}>
                     <Toolbar>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            FRDB
-                        </Typography>
+                        <Link component='button' color='inherit' underline='none' variant='h6' onClick={handleHomeClick}>FRDB</Link>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <RestaurantSearch></RestaurantSearch>
+                        <Box sx={{ flexGrow: 1 }} />
                         <Button onClick={handleLoginClick} color="inherit">Login</Button>
                     </Toolbar>
                 </AppBar>
