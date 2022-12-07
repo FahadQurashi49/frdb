@@ -1,10 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import { Autocomplete, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/SearchSharp';
+import { grey } from '@mui/material/colors';
 
 import cityArea from '../resource/area.json';
-import { grey } from '@mui/material/colors';
+
+
 
 const cities = [
     'Karachi',
@@ -15,6 +18,7 @@ const cities = [
 ]
 
 function RestaurantSearch() {
+    const navigate = useNavigate();
     const [city, setCity] = useState('');
     const cityAreaMap = new Map(cityArea as []);
     const [areas, setAreas] = useState([] as string[]);
@@ -38,7 +42,7 @@ function RestaurantSearch() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        window.location.href = `${window.location.origin}/restaurants/${city}_${area}`;
+        navigate(`/restaurants/${city}_${area}`);
     }
 
     return (

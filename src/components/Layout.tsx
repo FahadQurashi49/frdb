@@ -1,4 +1,4 @@
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useNavigation, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { Box } from '@mui/system';
 import { AppBar, Button, Link, Toolbar } from '@mui/material';
@@ -9,6 +9,7 @@ import RestaurantSearch from './RestaurantSearch';
 
 function Layout() {
     const navigtion = useNavigation();
+    const navigate = useNavigate();
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const [openSignupDialog, setOpenSignUpDialog] = useState(false);
 
@@ -34,7 +35,7 @@ function Layout() {
     console.log(navigtion.state);
 
     const handleHomeClick = () => {
-        window.location.href = `${window.location.origin}/`;
+        navigate('/');
     };
     return (
         <Box>
