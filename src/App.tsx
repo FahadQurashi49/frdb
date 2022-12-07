@@ -6,6 +6,7 @@ import Restaurant from './pages/Restaurant';
 import Home from './pages/Home';
 import Layout from './components/Layout';
 import AddReview from "./pages/AddReview";
+import { fetchRestaurants } from "./services/RestaurantService";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,9 @@ const router = createBrowserRouter([
   {
     path: "/restaurants/:cityArea",
     element: <Restaurants />,
+    loader: async ({ params }) => {
+      return await fetchRestaurants(params.cityArea);
+    }
   },
   {
     path: "/restaurant/:restaurantId",

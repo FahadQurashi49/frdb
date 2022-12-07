@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/SearchSharp';
 
 import cityArea from '../resource/area.json';
-import { grey, pink, red } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 
 const cities = [
     'Karachi',
