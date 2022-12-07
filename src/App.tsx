@@ -6,36 +6,41 @@ import Restaurant from './pages/Restaurant';
 import Home from './pages/Home';
 import Layout from './components/Layout';
 import AddReview from "./pages/AddReview";
+import ErrorPage from "./pages/ErrorPage";
 import { fetchRestaurants } from "./services/RestaurantService";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "/restaurants/:cityArea",
+        element: <Restaurants />,
+        loader: async ({ params }) => {
+          return await fetchRestaurants(params.cityArea);
+        }
+      },
+      {
+        path: "/restaurant/:restaurantId",
+        element: <Restaurant />
+      },
+      {
+        path: "/restaurant/:restaurantId/review/add",
+        element: <AddReview />,
+      }
+    ]
   },
-  {
-    path: "/restaurants/:cityArea",
-    element: <Restaurants />,
-    loader: async ({ params }) => {
-      return await fetchRestaurants(params.cityArea);
-    }
-  },
-  {
-    path: "/restaurant/:restaurantId",
-    element: <Restaurant />
-  },
-  {
-    path: "/restaurant/:restaurantId/review/add",
-    element: <AddReview />,
-  }
 ]);
 
 function App() {
-  return (
-    <Layout>
-      <RouterProvider router={router} />
-    </Layout>
-  );
+  return <RouterProvider router={router} />
 }
 
 export default App;

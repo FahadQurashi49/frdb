@@ -1,4 +1,5 @@
-import { ReactNode, useState } from 'react';
+import { Outlet, useNavigation } from "react-router-dom";
+import { useState } from 'react';
 import { Box } from '@mui/system';
 import { AppBar, Button, Link, Toolbar } from '@mui/material';
 import LoginDialog from './LoginDialog';
@@ -6,12 +7,8 @@ import SignUpDialog from './SignUpDialog';
 import RestaurantSearch from './RestaurantSearch';
 
 
-interface Props {
-    children?: ReactNode
-    // any props that come into the component
-}
-
-function Layout({ children } : Props) {
+function Layout() {
+    const navigtion = useNavigation();
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const [openSignupDialog, setOpenSignUpDialog] = useState(false);
 
@@ -34,6 +31,8 @@ function Layout({ children } : Props) {
         setOpenSignUpDialog(false);
     };
 
+    console.log(navigtion.state);
+
     const handleHomeClick = () => {
         window.location.href = `${window.location.origin}/`;
     };
@@ -55,7 +54,8 @@ function Layout({ children } : Props) {
                 <Box >
                     <LoginDialog open={openLoginDialog} handleClose={handleLoginDialogClose} handleSignUpClick={handleSignUpClick} />
                     <SignUpDialog open={openSignupDialog} handleClose={handleSignUpDialogClose} handleLoginClick={handleLoginFromSignUpClick} />
-                    {children}
+                    {navigtion.state === 'loading' && <div>Loading .....</div>}
+                    {navigtion.state === 'idle' && <Outlet />}
                 </Box>
 
                 
