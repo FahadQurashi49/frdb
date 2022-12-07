@@ -2,20 +2,19 @@ import { Box, Button, Chip, Divider, ImageList, ImageListItem, List, ListItem, L
 import { Stack } from "@mui/system";
 import LocationIcon from '@mui/icons-material/LocationOnSharp';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLoaderData } from "react-router-dom";
 
 import reviews from '../resource/review.json';
 import reviewImgs from '../resource/review_imgs.json';
+import { Restaurant as RestaurantModel } from "../models/Restaurant";
 
 function Restaurant() {
-  const { restaurantId } = useParams();
+  const restaurant = useLoaderData() as RestaurantModel;
   const navigate = useNavigate();
   const imgPath = '/static/images/bbq.jpeg';
-  const detailText = 'Located in Bahadurabad BBQ and grill house is the best restaurant in Karachi for BBQ and Kababs. Their BBQ platter is their seller and also grilled fish, Their BBQ platter is their seller and also grilled fish, Their BBQ platter is their seller and also grilled fish.';
-  const rating = 2.5;
 
   const handleAddReviewButtonClick = () => {
-    navigate(`/restaurant/${restaurantId}/review/add`);
+    navigate(`/restaurant/${restaurant.id}/review/add`);
   };
 
   return (
@@ -23,15 +22,18 @@ function Restaurant() {
       <Box sx={{ display: 'block', width: '100%', height: { md: 300, sm: 200, xs: 100 }, objectFit: 'cover' }} component='img' src={imgPath}></Box>
 
       <Stack spacing={1} my={2}>
-        <Typography component='div' sx={{ typography: { md: 'h4', sm: 'h5', xs: 'h6' } }} >BBQ and Grill</Typography>
+        <Typography component='div' 
+          sx={{ typography: { md: 'h4', sm: 'h5', xs: 'h6' } }} >
+            {restaurant.name}
+        </Typography>
         <Stack direction='row'>
-          <Rating name='read-only' value={rating} size='medium' precision={0.5} readOnly />
+          <Rating name='read-only' value={restaurant.avgRating} size='medium' precision={0.1} readOnly />
           <Box sx={{ ml: 0.5, typography: 'subtitle1' }}>
-            {rating}/5 (8)
+            {restaurant.avgRating}/5 ({restaurant.totalRatings})
           </Box>
 
         </Stack>
-        <Typography component='div' title={detailText}
+        <Typography component='div' title={restaurant.description}
           sx={{
             typography: { md: 'subtitle1', sm: 'subtitle2', xs: 'subtitle3' },
             overflow: 'hidden',
@@ -40,10 +42,10 @@ function Restaurant() {
             WebkitLineClamp: '2',
             WebkitBoxOrient: 'vertical'
           }} >
-          {detailText}
+          {restaurant.description}
         </Typography>
         <Stack direction='row'>
-          <Chip icon={<LocationIcon />} label='Bahadurabad, Karachi'></Chip>
+          <Chip icon={<LocationIcon />} label={`${restaurant.area}, ${restaurant.city}`}></Chip>
         </Stack>
         <Divider variant='fullWidth' ></Divider>
         <Stack direction='row' justifyContent='space-between'>

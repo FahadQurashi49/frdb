@@ -18,6 +18,21 @@ class RestaurantService {
         }
         throw Error('Please provide city and area');
     }
+
+    async fetchRestaurant(restaurantId?: string): Promise<Restaurant> {
+        if (restaurantId) {
+            const response = await fetch(`${RestaurantService.restaurantEndpoint}/${restaurantId}`);
+            const data = await response.json();
+            if (data) {
+                if (data.error) {
+                    throw Error(data.error);
+                }
+                return mapToRestaurant(data);
+            }
+            throw Error('Unable to fetch restaurant');
+        }
+        throw Error('Please provide restaurant id');
+    }
 }
 const restaurantService = new RestaurantService();
-export const { fetchRestaurants } = restaurantService;
+export const { fetchRestaurants, fetchRestaurant } = restaurantService;
