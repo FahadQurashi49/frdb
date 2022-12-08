@@ -8,6 +8,8 @@ import Layout from './components/Layout';
 import AddReview from "./pages/AddReview";
 import ErrorPage from "./pages/ErrorPage";
 import { fetchRestaurants, fetchRestaurant } from "./services/RestaurantService";
+import ReviewsList from "./components/ReviewsList";
+import { fetchReviews } from "./services/ReviewService";
 
 
 const router = createBrowserRouter([
@@ -32,7 +34,16 @@ const router = createBrowserRouter([
         element: <Restaurant />,
         loader: async ({ params }) => {
           return await fetchRestaurant(params.restaurantId);
-        }
+        },
+        children: [
+          {
+            path: '/restaurant/:restaurantId/reviews',
+            element: <ReviewsList />,
+            loader: async ({ params }) => {
+              return await fetchReviews(params.restaurantId)
+            }
+          }
+        ]
       },
       {
         path: "/restaurant/:restaurantId/review/add",

@@ -13,7 +13,7 @@ function RestaurantGridItem({ restaurant }: Props) {
     const navigate = useNavigate();
 
     const handleRestaurantClick = () => {
-        navigate(`/restaurant/${restaurant.id}`);
+        navigate(`/restaurant/${restaurant.id}/reviews`);
     };
     return (
         <Grid xs={12} sm={6} md={3} >

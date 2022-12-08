@@ -1,11 +1,9 @@
-import { Box, Button, Chip, Divider, ImageList, ImageListItem, List, ListItem, ListItemText, Rating, Typography } from "@mui/material";
+import { Box, Button, Chip, Divider, Rating, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import LocationIcon from '@mui/icons-material/LocationOnSharp';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
-import { useNavigate, useLoaderData } from "react-router-dom";
+import { Outlet, useNavigate, useLoaderData } from "react-router-dom";
 
-import reviews from '../resource/review.json';
-import reviewImgs from '../resource/review_imgs.json';
 import { Restaurant as RestaurantModel } from "../models/Restaurant";
 
 function Restaurant() {
@@ -56,50 +54,7 @@ function Restaurant() {
             Write a review
           </Button>
         </Stack>
-        
-        <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-          {reviews.map(review =>
-            <ListItem>
-              <ListItemText
-                secondary={
-                  <Stack mt={0.5} spacing={2}>
-                    <Box>
-                      {review.review_text}
-                    </Box>
-                    <ImageList
-                      sx={{
-                        gridAutoFlow: "column",
-                        gridTemplateColumns: "repeat(auto-fill,minmax(150px,1fr)) !important",
-                        gridAutoColumns: "minmax(150px, 1fr)"
-                      }}
-                    >
-                      {reviewImgs.map((reviewImg) => (
-
-                        <ImageListItem key={reviewImg}>
-                          <img
-                            src={`${reviewImg}`}
-                            srcSet={`${reviewImg}`}
-                            alt=''
-                            loading="lazy"
-                          />
-                        </ImageListItem>
-
-                      ))}
-                    </ImageList>
-                    <Divider variant="fullWidth" />
-                  </Stack>
-                }
-              >
-                <Stack spacing={0.5}>
-                  <Box>
-                    {review.user_name}
-                  </Box>
-                  <Rating name='read-only' value={review.rating} size='small' precision={0.5} readOnly />
-                </Stack>
-              </ListItemText>
-            </ListItem>
-          )}
-        </List>
+        <Outlet />
       </Stack>
 
 
