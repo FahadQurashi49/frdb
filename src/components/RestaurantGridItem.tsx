@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from "react-router-dom";
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardMedia, Rating, Stack, Typography } from "@mui/material";
 
 import { Restaurant } from '../models/Restaurant';
 
@@ -29,6 +29,12 @@ function RestaurantGridItem({ restaurant }: Props) {
                         <Typography noWrap gutterBottom variant="h5" component="div">
                             {restaurant.name}
                         </Typography>
+                        <Stack direction='row'>
+                            <Rating name='read-only' value={restaurant.avgRating} size='small' precision={0.1} readOnly />
+                            <Box sx={{ ml: 0.5, typography: 'subtitle2' }}>
+                                {restaurant.avgRating}/5 ({restaurant.totalRatings})
+                            </Box>
+                        </Stack>
                         <Typography noWrap variant="body2" color="text.secondary">
                             {restaurant.description}
                         </Typography>

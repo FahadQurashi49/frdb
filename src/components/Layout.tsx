@@ -8,7 +8,7 @@ import RestaurantSearch from './RestaurantSearch';
 
 
 function Layout() {
-    const navigtion = useNavigation();
+    const navigation = useNavigation();
     const navigate = useNavigate();
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const [openSignupDialog, setOpenSignUpDialog] = useState(false);
@@ -32,7 +32,7 @@ function Layout() {
         setOpenSignUpDialog(false);
     };
 
-    console.log(navigtion.state);
+    console.log(navigation.state);
 
     const handleHomeClick = () => {
         navigate('/');
@@ -55,8 +55,8 @@ function Layout() {
                 <Box >
                     <LoginDialog open={openLoginDialog} handleClose={handleLoginDialogClose} handleSignUpClick={handleSignUpClick} />
                     <SignUpDialog open={openSignupDialog} handleClose={handleSignUpDialogClose} handleLoginClick={handleLoginFromSignUpClick} />
-                    {navigtion.state === 'loading' && <div>Loading .....</div>}
-                    {navigtion.state === 'idle' && <Outlet />}
+                    {navigation.state === 'loading' && <div>Loading .....</div>}
+                    {navigation.state === 'idle' && <Outlet />}
                 </Box>
 
                 

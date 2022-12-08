@@ -2,13 +2,14 @@ import { Box, Button, Chip, Divider, Rating, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import LocationIcon from '@mui/icons-material/LocationOnSharp';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
-import { Outlet, useNavigate, useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigate, useNavigation } from "react-router-dom";
 
 import { Restaurant as RestaurantModel } from "../models/Restaurant";
 
 function Restaurant() {
   const restaurant = useLoaderData() as RestaurantModel;
   const navigate = useNavigate();
+  const navigation = useNavigation();
   const imgPath = '/static/images/bbq.jpeg';
 
   const handleAddReviewButtonClick = () => {
@@ -54,7 +55,8 @@ function Restaurant() {
             Write a review
           </Button>
         </Stack>
-        <Outlet />
+        {navigation.state === 'loading' && <div>Loading .....</div>}
+        {navigation.state === 'idle' && <Outlet />}
       </Stack>
 
 
