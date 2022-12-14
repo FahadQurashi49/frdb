@@ -1,18 +1,21 @@
-import { Outlet, useNavigation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigation, useNavigate, useLoaderData } from "react-router-dom";
 import { useState } from 'react';
 import { Box } from '@mui/system';
 import { AppBar, Button, Link, Toolbar } from '@mui/material';
 import LoginDialog from './LoginDialog';
 import SignUpDialog from './SignUpDialog';
 import RestaurantSearch from './RestaurantSearch';
+import { User } from "../models/User";
 
 
 function Layout() {
     const navigation = useNavigation();
     const navigate = useNavigate();
+    const user = useLoaderData() as User;
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const [openSignupDialog, setOpenSignUpDialog] = useState(false);
 
+    console.log('user from layout: ', user);
     const handleLoginClick = () => {
         setOpenLoginDialog(true);
     };
@@ -32,7 +35,7 @@ function Layout() {
         setOpenSignUpDialog(false);
     };
 
-    console.log(navigation.state);
+    console.log(navigation);
 
     const handleHomeClick = () => {
         navigate('/');

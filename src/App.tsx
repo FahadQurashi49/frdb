@@ -5,11 +5,12 @@ import Restaurants from './pages/Restaurants';
 import Restaurant from './pages/Restaurant';
 import Home from './pages/Home';
 import Layout from './components/Layout';
-import AddReview from "./pages/AddReview";
+import { AddReview, action as reviewAction } from "./pages/AddReview";
 import ErrorPage from "./pages/ErrorPage";
 import { fetchRestaurants, fetchRestaurant } from "./services/RestaurantService";
 import ReviewsList from "./components/ReviewsList";
 import { fetchReviews } from "./services/ReviewService";
+import { User } from "./models/User";
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,14 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     errorElement: <ErrorPage />,
+    loader: async () => {
+      const userStr = localStorage.getItem('user');
+      if (userStr) {
+        const user: User = JSON.parse(userStr);
+        return user;
+      }
+      return null;
+    },
     children: [
       {
         path: "/",
@@ -48,6 +57,7 @@ const router = createBrowserRouter([
       {
         path: "/restaurant/:restaurantId/review/add",
         element: <AddReview />,
+        action: reviewAction
       }
     ]
   },
