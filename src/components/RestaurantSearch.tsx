@@ -53,7 +53,7 @@ function RestaurantSearch() {
                         <InputLabel size='small' id="city-select-label">City</InputLabel>
                         <Select
                             labelId="city-select-label"
-                            id="city-select"
+                            id="city-select-search"
                             label='City'
                             autoWidth
                             value={city}
@@ -67,7 +67,7 @@ function RestaurantSearch() {
                     </FormControl>
                     <Autocomplete
                         disablePortal
-                        id="area-combo-box"
+                        id="area-combo-box-search"
                         disabled={!city}
                         options={areas}
                         value={area}
