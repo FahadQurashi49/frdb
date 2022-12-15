@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link, TextField, Typography } from "@mui/material";
+import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link, TextField, Typography } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import { useState } from "react";
 
@@ -18,19 +18,22 @@ function LoginDialog({ open, redirectTo, handleClose, handleSignUpClick, handleL
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const [loadingLogin, setLoadingLogin] = useState(false);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         try {
             event.preventDefault();
             const user: User = { email, password };
+            setLoadingLogin(true);
             const loggedInUser = await loginUser(user);
             setErrorMsg('');
+            setLoadingLogin(false);
             localStorage.setItem('user', JSON.stringify(loggedInUser));
             handleClose();
             handleLoginSuccess(loggedInUser);
-            // redirect(redirectTo);
         } catch (error: any) {
             // console.error(error);
+            setLoadingLogin(false);
             if (error?.message) {
                 setErrorMsg(error.message);
             }
@@ -66,6 +69,7 @@ function LoginDialog({ open, redirectTo, handleClose, handleSignUpClick, handleL
                                 variant='body2'
                                 underline='hover'
                                 onClick={handleSignUpClick}
+                                disabled={loadingLogin}
                             >
                                 Sign up
                             </Link>
@@ -73,8 +77,15 @@ function LoginDialog({ open, redirectTo, handleClose, handleSignUpClick, handleL
                     </Stack>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                        <Button type='submit'>Submit</Button>
+                    <Button disableElevation disabled={loadingLogin} variant='contained' onClick={handleClose}>Cancel</Button>
+                    <Button disableElevation disabled={loadingLogin} type='submit' variant='contained'>
+                        
+                        {loadingLogin && <CircularProgress size={18} sx={{mx: 2.2, my:0.5}}></CircularProgress>}
+                        {!loadingLogin &&  'Submit'}
+                    </Button>
+                        
+                   
+                    
                     </DialogActions>
                 </form>
             </Box>
