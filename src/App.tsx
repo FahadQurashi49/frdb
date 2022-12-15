@@ -10,7 +10,7 @@ import ErrorPage from "./pages/ErrorPage";
 import { fetchRestaurants, fetchRestaurant } from "./services/RestaurantService";
 import ReviewsList from "./components/ReviewsList";
 import { fetchReviews } from "./services/ReviewService";
-import { User } from "./models/User";
+import { getLoginUser } from "./services/UserService";
 
 
 const router = createBrowserRouter([
@@ -18,14 +18,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     errorElement: <ErrorPage />,
-    loader: () => {
-      const userStr = localStorage.getItem('user');
-      if (userStr) {
-        const user: User = JSON.parse(userStr);
-        return user;
-      }
-      return undefined;
-    },
+    loader: getLoginUser,
     children: [
       {
         path: "/",

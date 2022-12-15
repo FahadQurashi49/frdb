@@ -21,7 +21,18 @@ class UserService {
         }
         throw Error(`Please provide user`);
     }
+    getLoginUser() {
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+            const user: User = JSON.parse(userStr);
+            return user;
+        }
+        return undefined;
+    }
+    logoutUser() {
+        localStorage.removeItem('user');
+    }
 }
 
 const userService = new UserService();
-export const { loginUser } = userService;
+export const { loginUser, getLoginUser, logoutUser } = userService;

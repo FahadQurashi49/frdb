@@ -2,11 +2,16 @@ import { Outlet, useNavigation, useNavigate, useLoaderData } from "react-router-
 import { useState } from 'react';
 import { Box } from '@mui/system';
 import { AppBar, Button, Link, Toolbar } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 
 import LoginDialog from './LoginDialog';
 import SignUpDialog from './SignUpDialog';
 import RestaurantSearch from './RestaurantSearch';
 import { User } from "../models/User";
+import { logoutUser } from "../services/UserService";
 
 
 function Layout() {
@@ -15,9 +20,10 @@ function Layout() {
     const loggedInUser = useLoaderData() as User;
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const [openSignupDialog, setOpenSignUpDialog] = useState(false);
-    const [user, setUser] = useState<User>(loggedInUser);
+    const [user, setUser] = useState<User | undefined>(loggedInUser);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    console.log('user from layout: ', user);
+    // console.log('user from layout: ', user);
     const handleLoginClick = () => {
         setOpenLoginDialog(true);
     };
@@ -42,6 +48,19 @@ function Layout() {
 
     // console.log(navigation);
 
+    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+    const handleLogout = () => {
+        logoutUser();
+        setUser(undefined);
+        handleMenuClose();
+    };
+
     const handleHomeClick = () => {
         navigate('/');
     };
@@ -54,7 +73,38 @@ function Layout() {
                         <Box sx={{ flexGrow: 1 }} />
                         <RestaurantSearch></RestaurantSearch>
                         <Box sx={{ flexGrow: 1 }} />
-                        <Button onClick={handleLoginClick} color="inherit">Login</Button>
+                        {!user && <Button onClick={handleLoginClick} color="inherit">Login</Button>}
+                        {user &&
+                            <Box>
+                                <IconButton color='inherit' size='large'
+                                    aria-label='account of current user'
+                                    aria-controls='menu-appbar'
+                                    aria-haspopup='true'
+                                    onClick={handleMenu}
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleMenuClose}
+                                >
+                                    <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+                                    <MenuItem onClick={handleMenuClose}>My reviews</MenuItem>
+                                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                                </Menu>
+                            </Box>
+                        }
                     </Toolbar>
                 </AppBar>
             </Box>
