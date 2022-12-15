@@ -17,7 +17,7 @@ class UserService {
                 delete data.status;
                 return data as User;
             }
-            throw Error(`Something went wrong while fetching user: ${data}`);
+            throw Error(data?.error ? data.error : 'Something went wrong while login user');
         }
         throw Error(`Please provide user`);
     }

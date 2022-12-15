@@ -18,13 +18,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     errorElement: <ErrorPage />,
-    loader: async () => {
+    loader: () => {
       const userStr = localStorage.getItem('user');
       if (userStr) {
         const user: User = JSON.parse(userStr);
         return user;
       }
-      return null;
+      return undefined;
     },
     children: [
       {

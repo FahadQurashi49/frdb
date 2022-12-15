@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link, TextField, Typography } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import { useState } from "react";
 
@@ -7,22 +7,34 @@ import { loginUser } from "../services/UserService";
 
 interface Props {
     open: boolean,
+    redirectTo?: string,
     handleClose: () => void
     handleSignUpClick: () => void
+    handleLoginSuccess: (user: User) => void
     // any props that come into the component
 }
 
-function LoginDialog({ open, handleClose, handleSignUpClick }: Props) {
+function LoginDialog({ open, redirectTo, handleClose, handleSignUpClick, handleLoginSuccess }: Props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const user: User = { email, password };
-        console.log(user);
-        const loggedInUser = await loginUser(user);
-        localStorage.setItem('user', JSON.stringify(loggedInUser));
-        handleClose();
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        try {
+            event.preventDefault();
+            const user: User = { email, password };
+            const loggedInUser = await loginUser(user);
+            setErrorMsg('');
+            localStorage.setItem('user', JSON.stringify(loggedInUser));
+            handleClose();
+            handleLoginSuccess(loggedInUser);
+            // redirect(redirectTo);
+        } catch (error: any) {
+            // console.error(error);
+            if (error?.message) {
+                setErrorMsg(error.message);
+            }
+        }
     };
 
     return (
@@ -41,6 +53,13 @@ function LoginDialog({ open, handleClose, handleSignUpClick }: Props) {
                             variant='outlined' value={password} required
                             onChange={(e) => setPassword(e.target.value)} />
                         <DialogContentText variant='subtitle2'>
+                            {
+                                errorMsg && 
+                                <Typography component='div' variant='body2' 
+                                    color='red' >
+                                    {errorMsg}
+                                </Typography>
+                            }
                             Don't have an account?&nbsp;
                             <Link
                                 component='button'

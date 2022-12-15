@@ -2,6 +2,7 @@ import { Outlet, useNavigation, useNavigate, useLoaderData } from "react-router-
 import { useState } from 'react';
 import { Box } from '@mui/system';
 import { AppBar, Button, Link, Toolbar } from '@mui/material';
+
 import LoginDialog from './LoginDialog';
 import SignUpDialog from './SignUpDialog';
 import RestaurantSearch from './RestaurantSearch';
@@ -11,9 +12,10 @@ import { User } from "../models/User";
 function Layout() {
     const navigation = useNavigation();
     const navigate = useNavigate();
-    const user = useLoaderData() as User;
+    const loggedInUser = useLoaderData() as User;
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const [openSignupDialog, setOpenSignUpDialog] = useState(false);
+    const [user, setUser] = useState<User>(loggedInUser);
 
     console.log('user from layout: ', user);
     const handleLoginClick = () => {
@@ -21,6 +23,9 @@ function Layout() {
     };
     const handleLoginDialogClose = () => {
         setOpenLoginDialog(false);
+    };
+    const handleLoginSuccess = (user: User) => {
+        setUser(user);
     };
     const handleSignUpClick = () => {
         setOpenLoginDialog(false);
@@ -35,7 +40,7 @@ function Layout() {
         setOpenSignUpDialog(false);
     };
 
-    console.log(navigation);
+    // console.log(navigation);
 
     const handleHomeClick = () => {
         navigate('/');
@@ -56,7 +61,10 @@ function Layout() {
             <Box>
                 <Toolbar />
                 <Box >
-                    <LoginDialog open={openLoginDialog} handleClose={handleLoginDialogClose} handleSignUpClick={handleSignUpClick} />
+                    <LoginDialog open={openLoginDialog}
+                        handleClose={handleLoginDialogClose} 
+                        handleSignUpClick={handleSignUpClick}
+                        handleLoginSuccess={handleLoginSuccess} />
                     <SignUpDialog open={openSignupDialog} handleClose={handleSignUpDialogClose} handleLoginClick={handleLoginFromSignUpClick} />
                     {navigation.state === 'loading' && <div>Loading .....</div>}
                     {navigation.state === 'idle' && <Outlet />}
