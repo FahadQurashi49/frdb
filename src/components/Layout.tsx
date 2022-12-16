@@ -22,9 +22,14 @@ function Layout() {
     const [openSignupDialog, setOpenSignUpDialog] = useState(false);
     const [user, setUser] = useState<User | undefined>(loggedInUser);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [redirectUriFromLogin, setRedirectUriFromLogin] = useState<string>('');
 
     // console.log('user from layout: ', user);
     const handleLoginClick = () => {
+        setOpenLoginDialog(true);
+    };
+    const loginDialogOpen = (redirectTo: string) => {
+        setRedirectUriFromLogin(redirectTo);
         setOpenLoginDialog(true);
     };
     const handleLoginDialogClose = () => {
@@ -32,6 +37,11 @@ function Layout() {
     };
     const handleLoginSuccess = (user: User) => {
         setUser(user);
+        if (redirectUriFromLogin) {
+            const redirectUri = redirectUriFromLogin;
+            setRedirectUriFromLogin('');
+            navigate(redirectUri);
+        }
     };
     const handleSignUpClick = () => {
         setOpenLoginDialog(false);
@@ -117,10 +127,8 @@ function Layout() {
                         handleLoginSuccess={handleLoginSuccess} />
                     <SignUpDialog open={openSignupDialog} handleClose={handleSignUpDialogClose} handleLoginClick={handleLoginFromSignUpClick} />
                     {navigation.state === 'loading' && <div>Loading .....</div>}
-                    {navigation.state === 'idle' && <Outlet />}
+                    {navigation.state === 'idle' && <Outlet context={{ loginDialogOpen }} />}
                 </Box>
-
-                
             </Box>
         </Box>
         

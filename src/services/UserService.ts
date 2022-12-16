@@ -29,10 +29,13 @@ class UserService {
         }
         return undefined;
     }
+    isUserLoggedIn() {
+        return !!localStorage.getItem('user');
+    }
     logoutUser() {
         localStorage.removeItem('user');
     }
 }
 
 const userService = new UserService();
-export const { loginUser, getLoginUser, logoutUser } = userService;
+export const { loginUser, getLoginUser, logoutUser, isUserLoggedIn } = userService;

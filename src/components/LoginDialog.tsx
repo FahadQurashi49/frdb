@@ -7,14 +7,13 @@ import { loginUser } from "../services/UserService";
 
 interface Props {
     open: boolean,
-    redirectTo?: string,
     handleClose: () => void
     handleSignUpClick: () => void
     handleLoginSuccess: (user: User) => void
     // any props that come into the component
 }
 
-function LoginDialog({ open, redirectTo, handleClose, handleSignUpClick, handleLoginSuccess }: Props) {
+function LoginDialog({ open, handleClose, handleSignUpClick, handleLoginSuccess }: Props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
@@ -23,7 +22,7 @@ function LoginDialog({ open, redirectTo, handleClose, handleSignUpClick, handleL
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         try {
             event.preventDefault();
-            const user: User = { email, password };
+             const user: User = { email, password };
             setLoadingLogin(true);
             const loggedInUser = await loginUser(user);
             setErrorMsg('');

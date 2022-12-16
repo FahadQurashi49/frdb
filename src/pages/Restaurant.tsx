@@ -2,18 +2,26 @@ import { Box, Button, Chip, Divider, Rating, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import LocationIcon from '@mui/icons-material/LocationOnSharp';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
-import { Outlet, useLoaderData, useNavigate, useNavigation } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigate, useNavigation, useOutletContext } from "react-router-dom";
 
 import { Restaurant as RestaurantModel } from "../models/Restaurant";
+import { isUserLoggedIn } from "../services/UserService";
+
 
 function Restaurant() {
   const restaurant = useLoaderData() as RestaurantModel;
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const { loginDialogOpen } = useOutletContext() as any;
   const imgPath = '/static/images/bbq.jpeg';
 
   const handleAddReviewButtonClick = () => {
-    navigate(`/restaurant/${restaurant.id}/review/add`);
+    const redirectTo = `/restaurant/${restaurant.id}/review/add`;
+    if (isUserLoggedIn()) {
+      navigate(redirectTo);
+    } else {
+      loginDialogOpen(redirectTo);
+    }
   };
 
   return (
@@ -30,7 +38,6 @@ function Restaurant() {
           <Box sx={{ ml: 0.5, typography: 'subtitle1' }}>
             {restaurant.avgRating}/5 ({restaurant.totalRatings})
           </Box>
-
         </Stack>
         <Typography component='div' title={restaurant.description}
           sx={{
