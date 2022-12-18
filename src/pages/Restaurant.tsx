@@ -1,11 +1,14 @@
-import { Box, Button, Chip, Divider, Rating, Typography } from "@mui/material";
+import { Box, Button, Chip, Divider, Rating, Snackbar, SnackbarContent, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import LocationIcon from '@mui/icons-material/LocationOnSharp';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
-import { Outlet, useLoaderData, useNavigate, useNavigation, useOutletContext } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigate, useNavigation, useOutletContext, useSearchParams } from "react-router-dom";
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { forwardRef, SyntheticEvent, useState } from "react";
 
 import { Restaurant as RestaurantModel } from "../models/Restaurant";
 import { isUserLoggedIn } from "../services/UserService";
+
 
 
 function Restaurant() {
@@ -13,6 +16,9 @@ function Restaurant() {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const { loginDialogOpen } = useOutletContext() as any;
+  const [searchParams] = useSearchParams();
+  const reviewAddStatus = searchParams.get('reviewAdd');
+  const [openSnackBar, setOpenSnackbar] = useState(!!reviewAddStatus);
   const imgPath = '/static/images/bbq.jpeg';
 
   const handleAddReviewButtonClick = () => {
@@ -23,6 +29,48 @@ function Restaurant() {
       loginDialogOpen(redirectTo);
     }
   };
+
+  const handleSnackBarClose = (event?: SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+
+  const getSnackBarStatus = () => {
+    switch(reviewAddStatus) {
+      case 'success':
+        return 'success';
+      case 'failure':
+        return 'error'
+      case 'badReq':
+        return 'warning';
+      case 'logout':
+        return 'info';
+    }
+  };
+
+  const getSnackBarStatusMsg = () => {
+    switch(reviewAddStatus) {
+      case 'success':
+        return 'Successfully added review!';
+      case 'failure':
+        return 'Something went wrong while adding review'
+      case 'badReq':
+        return 'Bad request';
+      case 'logout':
+        return 'Please login to add a review';
+    }
+  };
+
+  const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref,
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
   return (
     <Box sx={{ mx: 5 }}>
@@ -65,6 +113,11 @@ function Restaurant() {
         {navigation.state === 'loading' && <div>Loading .....</div>}
         {navigation.state === 'idle' && <Outlet />}
       </Stack>
+      <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleSnackBarClose}>
+        <Alert severity={getSnackBarStatus()} onClose={handleSnackBarClose} sx={{ width: '100%' }}>
+          {getSnackBarStatusMsg()}
+        </Alert>
+      </Snackbar>
 
 
     </Box>

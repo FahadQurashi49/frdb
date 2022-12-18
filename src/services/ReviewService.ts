@@ -30,6 +30,46 @@ class ReviewService {
         }
         throw Error('Please provide review id');
     }
+
+    addReview = async (review: Review, token: string): Promise<boolean> => {
+        try {
+            if (review && token) {
+                const addReviewUrl = `${ReviewService.reviewEndpoint}`;
+                const reviewPayload = this.createReviewPayload(review, token);
+                const response = await fetch(addReviewUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: reviewPayload
+                });
+                const data = await response.json();
+                if (data.status === 200) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+
+    }
+
+    private createReviewPayload(review: Review, token:string) {
+        const { type, reviewText, restaurantId, userId, userName, rating } = review;
+        const reviewPayload = {
+            type,
+            review_text: reviewText,
+            restaurant_id: restaurantId,
+            user_id: userId,
+            user_name: userName,
+            rating,
+            imgs: '',
+            token
+        }
+        return JSON.stringify(reviewPayload);
+    }
 }
 const reviewService = new ReviewService();
-export const { fetchReviews, fetchReview } = reviewService;
+export const { fetchReviews, fetchReview, addReview } = reviewService;

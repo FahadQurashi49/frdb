@@ -1,13 +1,13 @@
 export interface Review {
-    id: string;
+    id?: string;
     type: string;
     reviewText: string;
     restaurantId: string;
-    userName: string;
+    userName?: string;
     userId: string;
-    createDate: string;
+    createDate?: string;
     rating: number;
-    imgs: string;
+    imgs?: string;
 }
 
 export function mapToReview(review: any) {
