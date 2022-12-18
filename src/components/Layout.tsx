@@ -1,7 +1,7 @@
 import { Outlet, useNavigation, useNavigate, useLoaderData, useLocation } from "react-router-dom";
 import { useState } from 'react';
 import { Box } from '@mui/system';
-import { AppBar, Button, Link, Toolbar } from '@mui/material';
+import { AppBar, Button, CircularProgress, Link, Toolbar } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
@@ -126,7 +126,16 @@ function Layout() {
                         handleSignUpClick={handleSignUpClick}
                         handleLoginSuccess={handleLoginSuccess} />
                     <SignUpDialog open={openSignupDialog} handleClose={handleSignUpDialogClose} handleLoginClick={handleLoginFromSignUpClick} />
-                    {navigation.state === 'loading' && <div>Loading .....</div>}
+                    {navigation.state === 'loading' && 
+                        <Box
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            minHeight="100vh"
+                        >
+                            <CircularProgress size={48} color='secondary' />
+                        </Box>
+                    }
                     {navigation.state === 'idle' && <Outlet context={{ loginDialogOpen }} />}
                 </Box>
             </Box>

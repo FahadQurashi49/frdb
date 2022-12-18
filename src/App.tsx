@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createTheme } from "@mui/material";
+import { green, purple } from "@mui/material/colors";
 
 import './App.css';
 import Restaurants from './pages/Restaurants';
@@ -11,7 +13,19 @@ import { fetchRestaurants, fetchRestaurant } from "./services/RestaurantService"
 import ReviewsList from "./components/ReviewsList";
 import { fetchReviews } from "./services/ReviewService";
 import { getLoginUser } from "./services/UserService";
+import { ThemeProvider } from "@emotion/react";
 
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: green[500],
+    },
+  }
+});
 
 const router = createBrowserRouter([
   {
@@ -57,7 +71,10 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <ThemeProvider theme={theme} >
+      <RouterProvider router={router} />
+    </ThemeProvider>);
 }
 
 export default App;
