@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { Autocomplete, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
-import { Box } from '@mui/system';
+import { Autocomplete, Button, FormControl, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/system';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/SearchSharp';
+import Image from '../resource/food-bg.webp';
 
 import cityArea from '../resource/area.json';
 
@@ -43,48 +44,64 @@ function Home() {
     }
 
     return (
-        <Box display="flex"
-            justifyContent="center"
-            alignItems="center"
-            minHeight="100vh"
-        >
-            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-                <Box display='flex' >
-                    <FormControl>
-                        <InputLabel id="city-select-label">City</InputLabel>
-                        <Select
-                            labelId="city-select-label"
-                            id="city-select"
-                            label="City"
-                            autoWidth
-                            value={city}
-                            sx={{ width: 150, mx: marginBetween }}
-                            onChange={handleCityChange}
+        <Box>
+            <Box display="flex"
+                justifyContent="center"
+                alignItems="center"
+                minHeight="100vh"
+                sx={{
+                    backgroundImage: `url(${Image})`,
+                    backgroundSize: 'cover'
+                }}
+            >
+                <Stack direction='column' >
+                    <Box ml={1} mb={3}>
+                        <Typography component="div" sx={{ typography: { md: 'h4', sm: 'h5', xs: 'h6' } }} >
+                            Food Review Database
+                        </Typography>
+                        <Typography component="div" variant='subtitle1' >
+                            Make your next meal decision informed
+                        </Typography>
+                    </Box>
+                <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+                    <Box display='flex' >
+                        <FormControl>
+                            <InputLabel id="city-select-label">City</InputLabel>
+                            <Select
+                                labelId="city-select-label"
+                                id="city-select"
+                                label="City"
+                                autoWidth
+                                value={city}
+                                sx={{ width: 150, mx: marginBetween }}
+                                onChange={handleCityChange}
+                            >
+                                {cities.map(city => <MenuItem key={city} value={city}>{city}</MenuItem>)}
+                            </Select>
+                        </FormControl>
+                        <Autocomplete
+                            disablePortal
+                            id="area-combo-box"
+                            disabled={!city}
+                            options={areas}
+                            value={area}
+                            onChange={handleAreaChange}
+                            sx={{ width: 200, mx: marginBetween }}
+                            renderInput={(params) => <TextField {...params} label="Area" />}
+                        />
+                        <Button variant='contained'
+                            type='submit'
+                            disableElevation
+                            sx={{ mx: marginBetween }}
+                            disabled={!city || !area}
                         >
-                            {cities.map(city => <MenuItem key={city} value={city}>{city}</MenuItem>)}
-                        </Select>
-                    </FormControl>
-                    <Autocomplete
-                        disablePortal
-                        id="area-combo-box"
-                        disabled={!city}
-                        options={areas}
-                        value={area}
-                        onChange={handleAreaChange}
-                        sx={{ width: 200, mx: marginBetween }}
-                        renderInput={(params) => <TextField {...params} label="Area" />}
-                    />
-                    <Button variant='contained'
-                    type='submit'
-                     disableElevation 
-                     sx={{ mx: marginBetween }}
-                     disabled={!city || !area}
-                    >
-                        <SearchIcon fontSize='large' />
-                    </Button>
-                </Box>
-                
-            </form>
+                            <SearchIcon fontSize='large' />
+                        </Button>
+                    </Box>
+
+                </form>
+                </Stack>
+            </Box>
         </Box>
     );
 }

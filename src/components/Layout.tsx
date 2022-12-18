@@ -1,4 +1,4 @@
-import { Outlet, useNavigation, useNavigate, useLoaderData } from "react-router-dom";
+import { Outlet, useNavigation, useNavigate, useLoaderData, useLocation } from "react-router-dom";
 import { useState } from 'react';
 import { Box } from '@mui/system';
 import { AppBar, Button, Link, Toolbar } from '@mui/material';
@@ -17,6 +17,7 @@ import { logoutUser } from "../services/UserService";
 function Layout() {
     const navigation = useNavigation();
     const navigate = useNavigate();
+    const location = useLocation();
     const loggedInUser = useLoaderData() as User;
     const [openLoginDialog, setOpenLoginDialog] = useState(false);
     const [openSignupDialog, setOpenSignUpDialog] = useState(false);
@@ -24,7 +25,6 @@ function Layout() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [redirectUriFromLogin, setRedirectUriFromLogin] = useState<string>('');
 
-    // console.log('user from layout: ', user);
     const handleLoginClick = () => {
         setOpenLoginDialog(true);
     };
@@ -119,7 +119,7 @@ function Layout() {
                 </AppBar>
             </Box>
             <Box>
-                <Toolbar />
+                { location.pathname !== '/' && <Toolbar /> }
                 <Box >
                     <LoginDialog open={openLoginDialog}
                         handleClose={handleLoginDialogClose} 
