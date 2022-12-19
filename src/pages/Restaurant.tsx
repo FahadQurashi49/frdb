@@ -19,7 +19,7 @@ function Restaurant() {
   const [searchParams] = useSearchParams();
   const reviewAddStatus = searchParams.get('reviewAdd');
   const [openSnackBar, setOpenSnackbar] = useState(!!reviewAddStatus);
-  const imgPath = '/static/images/bbq.jpeg';
+  const imgPath = `/static/images/restaurants/${restaurant.name}.jpeg`;
 
   const handleAddReviewButtonClick = () => {
     const redirectTo = `/restaurant/${restaurant.id}/review/add`;

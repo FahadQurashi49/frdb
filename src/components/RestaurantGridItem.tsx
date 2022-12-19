@@ -22,7 +22,7 @@ function RestaurantGridItem({ restaurant }: Props) {
                     <CardMedia
                         component="img"
                         height="140"
-                        image="/static/images/bbq.jpeg"
+                        image={`/static/images/restaurants/${restaurant.name}.jpeg`}
                         alt={restaurant.name}
                     />
                     <CardContent>
