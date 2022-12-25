@@ -8,9 +8,10 @@ import reviewImgs from '../resource/review_imgs.json';
 
 function ReviewsList() {
     const reviews = useLoaderData() as Review[];
+    const showImgList = false;
     return (
         <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-          {reviews.map(review =>
+          {reviews.map((review, index) =>
             <ListItem>
               <ListItemText
                 secondary={
@@ -18,26 +19,27 @@ function ReviewsList() {
                     <Box>
                       {review.reviewText}
                     </Box>
-                    <ImageList
-                      sx={{
-                        gridAutoFlow: "column",
-                        gridTemplateColumns: "repeat(auto-fill,minmax(150px,1fr)) !important",
-                        gridAutoColumns: "minmax(150px, 1fr)"
-                      }}
-                    >
-                      {reviewImgs.map((reviewImg) => (
+                    {reviewImgs && showImgList &&
+                      <ImageList
+                        sx={{
+                          gridAutoFlow: "column",
+                          gridTemplateColumns: "repeat(auto-fill,minmax(150px,1fr)) !important",
+                          gridAutoColumns: "minmax(150px, 1fr)"
+                        }}
+                      >
+                        {reviewImgs.map((reviewImg) => (
 
-                        <ImageListItem key={reviewImg}>
-                          <img
-                            src={`${reviewImg}`}
-                            srcSet={`${reviewImg}`}
-                            alt=''
-                            loading="lazy"
-                          />
-                        </ImageListItem>
+                          <ImageListItem key={reviewImg}>
+                            <img
+                              src={`${reviewImg}`}
+                              srcSet={`${reviewImg}`}
+                              alt=''
+                              loading="lazy"
+                            />
+                          </ImageListItem>
 
-                      ))}
-                    </ImageList>
+                        ))}
+                      </ImageList>}
                     <Divider variant="fullWidth" />
                   </Stack>
                 }
