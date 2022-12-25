@@ -64,7 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/restaurant/:restaurantId/review/add",
         element: <AddReview />,
-        action: reviewAction
+        action: reviewAction,
+        loader: async ({ params }) => {
+          return await fetchRestaurant(params.restaurantId);
+        },
       }
     ]
   },

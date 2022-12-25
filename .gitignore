@@ -25,4 +25,5 @@ yarn-error.log*
 /public/static/images
 /src/resource/config.json
 temp.txt
+temp2.txt
 /src/resource/food-bg.webp

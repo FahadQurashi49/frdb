@@ -126,7 +126,7 @@ function Layout() {
                         handleSignUpClick={handleSignUpClick}
                         handleLoginSuccess={handleLoginSuccess} />
                     <SignUpDialog open={openSignupDialog} handleClose={handleSignUpDialogClose} handleLoginClick={handleLoginFromSignUpClick} />
-                    {navigation.state === 'loading' && 
+                    {(navigation.state === 'loading' || navigation.state === 'submitting') && 
                         <Box
                             display="flex"
                             justifyContent="center"
