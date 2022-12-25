@@ -24,7 +24,7 @@ export function mapToRestaurant(restaurant: any) {
         location,
         city,
         area,
-        avgRating: avg_rating,
+        avgRating: parseFloat(avg_rating.toFixed(1)),
         totalRatings: total_ratings,
         logo
     };
